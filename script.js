@@ -3,10 +3,8 @@
 var part1 = "k12ww 7s49v ,?286?mv 27rq s33od4 6fh77k r4og2 hu+";
 var part2 = "yd23 un394 hti58 j934+0 67htr9 8?173h t23r96 rj8s3 y73x";
 
-console.log(decipher(part1, 3) + decipher(part2, 5));
-
 //  clean the input
-function cleanText (input) {
+const cleanText = (input) => {
     var output;
     output = input.replace(/[0-9]/g, '');
     output = output.replaceAll(' ', '');
@@ -17,7 +15,7 @@ function cleanText (input) {
 }
 
 // decipher
-function decipher (input, shift) {
+const decipher = (input, shift) => {
     input = cleanText(input);
     var output = "";
     var charCode;
@@ -32,4 +30,30 @@ function decipher (input, shift) {
     return output;
 }
 
-// 
+// get data with REST
+const gatherData = async (url) => {
+    url = "https://jsonplaceholder.typicode.com/comments";
+    const response = await fetch(url);
+    const json = await response.json();
+    var emails = [];
+    json.forEach(comment => {
+        emails.push(comment.email);
+    });
+    return emails;
+}
+
+const displayData = async (url) => {
+    var commentsBox = document.querySelector('.comments');
+    var emails = await gatherData(url);
+    emails.forEach(email => {
+        commentsBox.innerHTML += `<p> ${email} </p>`;
+    });
+
+}
+
+// get url
+var url = decipher(part1, 3) + decipher(part2, 5);
+
+displayData(url);
+
+console.log(url);
