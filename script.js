@@ -38,12 +38,18 @@ const gatherData = async (url) => {
 }
 
 const displayData = async (url) => {
-    var commentsBox = document.querySelector('.comments');
-    var posts = await gatherData(url);
-    posts.forEach(post => {
-        commentsBox.innerHTML += `
-            <h3> ${post.name} by ${post.email} </h3>
-            <p> ${post.body} </p>
+    var postsBox = document.querySelector('.posts');
+    var postsComments = await gatherData(url);
+    var posts = [];
+    postsComments.forEach(comment => {
+        if(!posts.includes(comment.postId)) { 
+            posts.push(comment.postId);
+            postsBox.innerHTML += `<div class= "post-${comment.postId}"><h2> This is post ${comment.postId}</h2><\div>`;
+        };
+        var postDiv = document.querySelector('.post-' + comment.postId);
+        postDiv.innerHTML += `
+            <h3> ${comment.name} by ${comment.email} </h3>
+            <p> ${comment.body} </p>
         `;
     });
 }
