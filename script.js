@@ -10,7 +10,7 @@ cleanText(part1);
 function cleanText (input) {
     var output;
 
-    output = output.replace(/[\s\d]/, '');
+    output = input.replace(/[\s\d]/, '');
 
     console.log(output);
 }
