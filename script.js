@@ -44,7 +44,7 @@ const displayData = async (url) => {
     postsComments.forEach(comment => {
         if(!posts.includes(comment.postId)) { 
             posts.push(comment.postId);
-            postsBox.innerHTML += `<div class= "post-${comment.postId}"><h2> This is post ${comment.postId}</h2><\div>`;
+            postsBox.innerHTML += `<div class= "post-${comment.postId}"><h2> This is post ${comment.postId}</h2><p>Comments below</p><\div>`;
         };
         var postDiv = document.querySelector('.post-' + comment.postId);
         postDiv.innerHTML += `
