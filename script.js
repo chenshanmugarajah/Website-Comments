@@ -34,21 +34,18 @@ const decipher = (input, shift) => {
 const gatherData = async (url) => {
     url = "https://jsonplaceholder.typicode.com/comments";
     const response = await fetch(url);
-    const json = await response.json();
-    var emails = [];
-    json.forEach(comment => {
-        emails.push(comment.email);
-    });
-    return emails;
+    return await response.json();
 }
 
 const displayData = async (url) => {
     var commentsBox = document.querySelector('.comments');
-    var emails = await gatherData(url);
-    emails.forEach(email => {
-        commentsBox.innerHTML += `<p> ${email} </p>`;
+    var posts = await gatherData(url);
+    posts.forEach(post => {
+        commentsBox.innerHTML += `
+            <h3> ${post.name} by ${post.email} </h3>
+            <p> ${post.body} </p>
+        `;
     });
-
 }
 
 // get url
