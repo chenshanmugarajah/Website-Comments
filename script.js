@@ -1,4 +1,3 @@
-
 // inputs
 var part1 = "k12ww 7s49v ,?286?mv 27rq s33od4 6fh77k r4og2 hu+";
 var part2 = "yd23 un394 hti58 j934+0 67htr9 8?173h t23r96 rj8s3 y73x";
@@ -36,11 +35,11 @@ const decipher = (input, shift) => {
 
 // get data with REST
 const gatherData = async (url) => {
-    // url = "https://jsonplaceholder.typicode.com/comments";
     const response = await fetch(url);
     return await response.json();
 }
 
+// display data in front end
 const displayData = async (url) => {
     var postsBox = document.querySelector('.posts');
     var postsComments = await gatherData(url);
@@ -62,5 +61,3 @@ const displayData = async (url) => {
 var url = decipher(part1, 3) + decipher(part2, 5);
 
 displayData(url);
-
-console.log(url);
