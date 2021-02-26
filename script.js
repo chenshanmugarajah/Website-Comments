@@ -22,7 +22,11 @@ const decipher = (input, shift) => {
     for (var i=0; i < input.length; i++) {
         if ((/[a-zA-Z]/).test(input[i])) {
             charCode = (input[i].charCodeAt()) - shift;
-            output += String.fromCharCode(charCode);
+            if (charCode < 97) {
+                charCode += 26;
+            }
+            var letter = String.fromCharCode(charCode);
+            output += letter;
         } else {
             output += input[i];
         }
@@ -32,7 +36,7 @@ const decipher = (input, shift) => {
 
 // get data with REST
 const gatherData = async (url) => {
-    url = "https://jsonplaceholder.typicode.com/comments";
+    // url = "https://jsonplaceholder.typicode.com/comments";
     const response = await fetch(url);
     return await response.json();
 }
