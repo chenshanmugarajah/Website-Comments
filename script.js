@@ -4,7 +4,7 @@ var part2 = "yd23 un394 hti58 j934+0 67htr9 8?173h t23r96 rj8s3 y73x";
 
 //  clean the input
 const cleanText = (input) => {
-    var output;
+    var output = "";
     output = input.replace(/[0-9]/g, '');
     output = output.replaceAll(' ', '');
     output = output.replaceAll(',', ':');
@@ -62,4 +62,5 @@ var cleanPart1 = cleanText(part1);
 var cleanPart2 = cleanText(part2);
 var url = decipher(cleanPart1, 3) + decipher(cleanPart2, 5);
 
+// display
 displayData(url);
