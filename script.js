@@ -15,7 +15,6 @@ const cleanText = (input) => {
 
 // decipher
 const decipher = (input, shift) => {
-    input = cleanText(input);
     var output = "";
     var charCode;
     for (var i=0; i < input.length; i++) {
@@ -34,7 +33,7 @@ const decipher = (input, shift) => {
 }
 
 // get data with REST
-const gatherData = async (url) => {
+const getData = async (url) => {
     const response = await fetch(url);
     return await response.json();
 }
@@ -42,19 +41,25 @@ const gatherData = async (url) => {
 // display data in front end
 const displayData = async (url) => {
     var postsBox = document.querySelector('.posts');
-    var postsComments = await gatherData(url);
+    var postsComments = await getData(url);
     var posts = [];
+
     postsComments.forEach(comment => {
         if(!posts.includes(comment.postId)) { 
             posts.push(comment.postId);
-            postsBox.innerHTML += `<div class= "post-${comment.postId}"><h2> This is post ${comment.postId}</h2><p>Comments below</p><\div>`;
+            postsBox.innerHTML += `<div class= "post-${comment.postId}"><h2> This is post ${comment.postId}</h2><\div>`;
         };
+
         var postDiv = document.querySelector('.post-' + comment.postId);
-        postDiv.innerHTML += `<h3>${comment.email}</h3>`;
+        postDiv.innerHTML += `<h4>${comment.email}</h4>`;
+
+        console.log(comment.email);
     });
 }
 
 // get url
-var url = decipher(part1, 3) + decipher(part2, 5);
+var cleanPart1 = cleanText(part1);
+var cleanPart2 = cleanText(part2);
+var url = decipher(cleanPart1, 3) + decipher(cleanPart2, 5);
 
 displayData(url);
