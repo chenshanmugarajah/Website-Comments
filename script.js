@@ -50,10 +50,7 @@ const displayData = async (url) => {
             postsBox.innerHTML += `<div class= "post-${comment.postId}"><h2> This is post ${comment.postId}</h2><p>Comments below</p><\div>`;
         };
         var postDiv = document.querySelector('.post-' + comment.postId);
-        postDiv.innerHTML += `
-            <h3> ${comment.name} by ${comment.email} </h3>
-            <p> ${comment.body} </p>
-        `;
+        postDiv.innerHTML += `<h3>${comment.email}</h3>`;
     });
 }
 
