@@ -32,8 +32,7 @@ const decipher = (input, shift) => {
     return output;
 }
 
-
-var posts = [];
+var posts = [{}];
 
 // get data with REST
 const getData = async (url) => {
@@ -70,13 +69,14 @@ const displayData = async (url) => {
     await getData(url);
     var postsSection = document.querySelector('.posts');
 
-    posts.forEach(post => {
+    for(var i=1; i<posts.length; i++) {
+        var post = posts[i];
         postsSection.innerHTML += 
         `<div class="post" id="post-${post.id}">
             <h3 class="post-title"> Title for post ${post.id} </h3>
             <button class="post-button" id="${post.id}"> OPEN </button>
         </div>`;
-    })
+    }
 }
 
 var modal = document.getElementById("postModal");
