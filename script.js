@@ -73,7 +73,7 @@ const displayData = async (url) => {
         var post = posts[i];
         postsSection.innerHTML += 
         `<div class="post" id="post-${post.id}">
-            <h3 class="post-title"> Title for post ${post.id} </h3>
+            <h3 class="post-title"> Post Number ${post.id} </h3>
             <button class="post-button" id="${post.id}"> OPEN </button>
         </div>`;
     }
