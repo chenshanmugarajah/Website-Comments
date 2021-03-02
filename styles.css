@@ -1,12 +1,12 @@
-/* * {
+* {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-} */
+}
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #414141;
+    background-color: #4b4b4b;
     color: rgb(226, 226, 226);
 }
 
@@ -16,6 +16,7 @@ header {
     margin: auto;
     height: 10vh;
     align-items: center;
+    text-shadow: 2px 2px 3px rgb(39, 39, 39);
 }
 
 .logo-container, .nav-links {
@@ -45,3 +46,12 @@ nav {
     text-decoration: none;
     color: inherit;
 }
+
+.info-paragraph {
+    width: 80%;
+    margin: 0 auto 50px auto;
+    text-align: center;
+    text-shadow: 2px 2px 3px rgb(39, 39, 39);
+}
+
+

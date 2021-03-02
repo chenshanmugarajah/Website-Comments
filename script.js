@@ -32,29 +32,52 @@ const decipher = (input, shift) => {
     return output;
 }
 
+
+var posts = [];
+
 // get data with REST
 const getData = async (url) => {
     const response = await fetch(url);
-    return await response.json();
+    var postsComments = await response.json();
+
+    postsComments.forEach(comment => {
+
+        if (posts[comment.postId] == null) {
+            posts.push({
+                id: comment.postId,
+                comments: [{
+                    commentId: comment.id,
+                    name: comment.name,
+                    email: comment.email,
+                    body: comment.body
+                }]
+            })
+        } else {
+            posts[comment.postId]['comments'].push({
+                commentId: comment.id,
+                name: comment.name,
+                email: comment.email,
+                body: comment.body
+            })
+        }  
+
+    });
+
 }
 
 // display data in front end
 const displayData = async (url) => {
-    var postsBox = document.querySelector('.posts');
-    var postsComments = await getData(url);
-    var posts = [];
+    await getData(url);
+    var postsSection = document.querySelector('.posts');
 
-    postsComments.forEach(comment => {
-        if(!posts.includes(comment.postId)) { 
-            posts.push(comment.postId);
-            postsBox.innerHTML += `<div class= "post-${comment.postId}"><h2> This is post ${comment.postId}</h2><\div>`;
-        };
-
-        var postDiv = document.querySelector('.post-' + comment.postId);
-        postDiv.innerHTML += `<h4>${comment.email}</h4>`;
-
-        console.log(comment.email);
-    });
+    posts.forEach(post => {
+        postsSection.innerHTML += 
+        `<div class="post" id="post-${post.id}">
+            <h4> ${post.id} </h4>
+            <h3> This is the title for post ${post.id} </h3>
+            <button> OPEN </button>
+        </div>`;
+    })
 }
 
 // get url
