@@ -73,11 +73,35 @@ const displayData = async (url) => {
     posts.forEach(post => {
         postsSection.innerHTML += 
         `<div class="post" id="post-${post.id}">
-            <h4> ${post.id} </h4>
-            <h3> This is the title for post ${post.id} </h3>
-            <button> OPEN </button>
+            <h3 class="post-title"> Title for post ${post.id} </h3>
+            <button class="post-button" id="${post.id}"> OPEN </button>
         </div>`;
     })
+}
+
+var modal = document.getElementById("postModal");
+var span = document.getElementsByClassName("close")[0];
+
+document.addEventListener('click', function(e) {
+    if(e.target && e.target.className == 'post-button') {
+        var id = e.target.id;
+        posts[id]['comments'].forEach(comment => {
+            document.getElementById("emails-list").innerHTML += `<p> ${comment.email} </p>`;
+        })
+        modal.style.display = "block"
+    }
+})
+
+span.onclick = function() {
+    modal.style.display = "none";
+    document.getElementById("emails-list").innerHTML = "";
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        document.getElementById("emails-list").innerHTML = "";
+    }
 }
 
 // get url
